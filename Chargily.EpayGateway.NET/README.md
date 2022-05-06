@@ -1,7 +1,3 @@
-<img src="https://raw.githubusercontent.com/rainxh11/Chargily.EpayGateway.NET/master/assets/chargily.svg" width="300">
-
-[![Latest version](https://img.shields.io/nuget/v/Chargily.EpayGateway.NET.svg)](https://www.nuget.org/packages/Chargily.EpayGateway.NET/)
-
 # Chargily ePay Gateway C\#.NET Plugin, supports ASP.NET Core, Xamarin, .NET MAUI
 
 ![Chargily ePay Gateway](https://raw.githubusercontent.com/Chargily/epay-gateway-php/main/assets/banner-1544x500.png "Chargily ePay Gateway")
