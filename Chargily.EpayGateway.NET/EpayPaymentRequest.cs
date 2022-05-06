@@ -32,31 +32,4 @@ namespace Chargily.EpayGateway.NET
             get => Amount - (Amount * DiscountPercentage / 100);
         }
     }
-
-    public class PaymentRequest
-    {
-        public string Name { get; set; }
-
-        public string Email { get; set; }
-
-        public string InvoiceNumber { get; set; }
-
-        public double Amount { get; set; }
-
-        public double DiscountPercentage { get; set; }
-
-        public string RedirectBackTo { get; set; }
-        public string CameFrom { get; set; }
-
-        [JsonConverter(typeof(JsonStringEnumConverter))]
-        public PaymentMethod PaymentMethod { get; set; }
-
-        public string ExtraInfo { get; set; }
-
-        [JsonIgnore]
-        public double AmountAfterDiscount
-        {
-            get => Amount - (Amount * DiscountPercentage / 100);
-        }
-    }
 }

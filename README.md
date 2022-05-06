@@ -45,6 +45,7 @@ var response = await client.CreatePayment(EpayPaymentRequest);
 # Usage with ASP.NET Core Minimal API
 ```csharp
 using Chargily.EpayGateway.NET;
+using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -56,7 +57,7 @@ app.MapPost("/invoice",
     async ([FromBody] EpayPaymentRequest request,
         [FromServices] IChargilyEpayClient<EpayPaymentResponse, EpayPaymentRequest> chargilyClient) =>
     {
-        return await chargilyClient.CreatePayment(request.Adapt<EpayPaymentRequest>());
+        return await chargilyClient.CreatePayment(request);
     });
 
 app.Run();
@@ -90,7 +91,78 @@ app.Run();
     "createdOn": "2022-05-06T03:55:49.6527862+01:00"
 }
 ```
+### WebHook Validation:
+```csharp
+using Chargily.EpayGateway.NET;
+using Microsoft.AspNetCore.Mvc;
 
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddChargilyWebHookValidator("[APP_SECRET]");
+
+var app = builder.Build();
+app.MapPost("/webhook-validator", ([FromServices] IWebHookValidator validator, HttpRequest request) =>
+{
+    var signature = request.Headers["Signature"].First();
+    var validation = validator.Validate(signature, request.Body);
+
+    return validation;
+});
+
+app.Run();
+```
+
+### Configuration:
+`API_KEY` & `APP_SECRET` can be added directly in code or from `appsettings.json` configuration file
+```csharp
+builder.Services.AddChargilyWebHookValidator("[APP_SECRET]");
+builder.Services.AddChargilyEpayGateway("[API_KEY]");
+
+// OR
+
+builder.Services.AddChargilyWebHookValidator(builder.Configuration["CHARGILY_APP_SECRET"]);
+builder.Services.AddChargilyEpayGateway(builder.Configuration["CHARGILY_API_KEY"]);
+
+// OR
+// Same as previous but it will be loaded automatically from appsettings.json
+builder.Services.AddChargilyWebHookValidator());
+builder.Services.AddChargilyEpayGateway();
+```
+`appsettings.json` file:
+```json
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "AllowedHosts": "*",
+  "CHARGILY_APP_SECRET": "[APP_SECRET]", // <-- APP SECRET
+  "CHARGILY_API_KEY": "[API_KEY]" // <-- API KEY
+}
+```
+
+## ASP.NET Core Middleware
+This package provide `WebHookValidatorMiddleware` ASP.NET Core Middleware, when registered every `POST` request that have a `Signature` Http Header will be validated automtically
+How to register the Middleware:
+```csharp
+using Chargily.EpayGateway.NET;
+
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddChargilyEpayGateway("[API_KEY]");
+
+builder.Services
+    .AddChargilyWebHookValidator("[APP_SECRET]") 
+    .AddChargilyValidatorMiddleware(); // Both WebHookValidator & WebHookValidatorMiddleware have to be registered
+
+var app = builder.Build();
+
+app.UseChargilyValidatorMiddleware();
+
+app.Run();
+```
 
 # Usage with .NET MAUI
 ```csharp
@@ -118,15 +190,25 @@ then you can add in `ViewModels`:
 public class MainViewModel : ViewModelBase  
 {  
     private ChargilyEpayClient _chargilyClient;  
+    private IWebHookValidator _webhookValidator;
 
     public MainViewModel(ChargilyEpayClient chargilyClient)  
     {  
         _chargilyClient = chargilyClient;  
     }  
-    ...  
+    // With Validator
+    public MainViewModel(ChargilyEpayClient chargilyClient, IWebHookValidator webhookValidator)  
+    {  
+        _chargilyClient = chargilyClient;  
+        _webhookValidator = webhookValidator;
+    }  
 }
 ```
+### Note when using .NET MAUI / Xamarin:
+storing sensitive `APP_SECRET` in a frontend app is not a recommended approach, you'd be better off calling a backend api to handle payment, but it's doable.
+if you decide to use it in the frontend, consider storing `APP_SECRET` with [`Akavache`](https://github.com/reactiveui/Akavache) [`BlobCache.Secure`](https://github.com/reactiveui/Akavache#choose-a-location)
+
 
 ### This package is using [`Microsoft.Extensions.DependencyInjection`](https://www.nuget.org/packages/Microsoft.Extensions.DependencyInjection) dependancy injection, so it can be used with application or framework using it.
 
-[api-keys]: https://epay.chargily.com.dz/secure/admin/apikeys
+[api-keys]: https://epay.chargily.com.dz/secure/admin/epay-api

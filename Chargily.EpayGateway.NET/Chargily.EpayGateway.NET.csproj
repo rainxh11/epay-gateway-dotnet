@@ -1,17 +1,17 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-	  <TargetFrameworks>netstandard2.0</TargetFrameworks>
+	  <TargetFrameworks>netstandard2.0;netstandard2.1;net6.0</TargetFrameworks>
 	  <LangVersion>8.0</LangVersion>
 	  <PackageIcon>chargily.png</PackageIcon>
 	  <PackageReadmeFile>readme.md</PackageReadmeFile>
 	  <PackageLicenseFile>LICENSE</PackageLicenseFile>
 	  <OutputType>Library</OutputType>
-	  <Version>1.0.5</Version>
+	  <Version>1.0.7</Version>
 	  <StartupObject />
 	  <Authors>Chakhoum Ahmed (github.com/rainxh11)</Authors>
 	  <Description>C# .NET Plugin for Chargily Epay Gateway</Description>
-	  <Copyright>(c)2022 Chakhoum Ahmed</Copyright>
+	  <Copyright>(c) 2022 Chakhoum Ahmed</Copyright>
 	  <PackageLicenseFile>LICENSE</PackageLicenseFile>
 	  <PackageProjectUrl>https://github.com/rainxh11/epay-gateway-dotnet</PackageProjectUrl>
 	  <RepositoryUrl>https://github.com/rainxh11/epay-gateway-dotnet</RepositoryUrl>
@@ -26,6 +26,8 @@
 	  
 	  <PackageReference Include="FluentValidation" Version="11.0.0" />
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.1" />
     <PackageReference Include="Refit" Version="6.3.2" />

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
 
 namespace Chargily.EpayGateway.NET
 {
@@ -12,9 +13,9 @@ namespace Chargily.EpayGateway.NET
     {
         private readonly string _apiKey;
         private readonly IChargilyEpayAPI _apiClient;
+        private readonly IValidator<EpayPaymentRequest> _validator;
 #nullable enable
         private readonly ILogger<ChargilyEpayClient>? _logger;
-        private readonly IValidator<EpayPaymentRequest>? _validator;
 #nullable disable
         public ChargilyEpayClient(string apiKey,
             ILogger<ChargilyEpayClient> logger,
@@ -25,6 +26,17 @@ namespace Chargily.EpayGateway.NET
             _logger = logger;
             _validator = validator;
             _apiClient = apiClient;
+        }
+
+        public ChargilyEpayClient(IConfiguration configuration,
+            ILogger<ChargilyEpayClient> logger,
+            IValidator<EpayPaymentRequest> validator,
+            IChargilyEpayAPI apiClient)
+        {
+            _logger = logger;
+            _validator = validator;
+            _apiClient = apiClient;
+            _apiKey = configuration["CHARGILY_API_KEY"];
         }
 
         public async Task<EpayPaymentResponse> CreatePayment(EpayPaymentRequest request)
