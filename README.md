@@ -144,7 +144,7 @@ builder.Services.AddChargilyEpayGateway();
 ```
 
 ## ASP.NET Core Middleware
-This package provide `WebHookValidatorMiddleware` ASP.NET Core Middleware, when registered every `POST` request that have a `Signature` Http Header will be validated automtically
+This package provide `WebHookValidatorMiddleware` ASP.NET Core Middleware, when registered every `POST` request that have a `Signature` Http Header will be validated automatically. 
 How to register the Middleware:
 ```csharp
 using Chargily.EpayGateway.NET;
