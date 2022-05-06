@@ -56,7 +56,7 @@ app.MapPost("/invoice",
     async ([FromBody] EpayPaymentRequest request,
         [FromServices] IChargilyEpayClient<EpayPaymentResponse, EpayPaymentRequest> chargilyClient) =>
     {
-        return await chargilyClient.CreatePayment(request.Adapt<EpayPaymentRequest>());
+        return await chargilyClient.CreatePayment(request);
     });
 
 app.Run();
