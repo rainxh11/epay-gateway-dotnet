@@ -1,4 +1,4 @@
-<img src="https://raw.githubusercontent.com/rainxh11/Chargily.EpayGateway.NET/master/assets/chargily.svg" width="300">
+<img src="https://raw.githubusercontent.com/rainxh11/epay-gateway-dotnet/master/assets/chargily.svg" width="300">
 
 [![Latest version](https://img.shields.io/nuget/v/Chargily.EpayGateway.NET.svg)](https://www.nuget.org/packages/Chargily.EpayGateway.NET/)
 
