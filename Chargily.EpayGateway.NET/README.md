@@ -150,8 +150,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddChargilyEpayGateway("[API_KEY]");
 
 builder.Services
-    .AddChargilyWebHookValidator("[APP_SECRET]") 
-    .AddChargilyValidatorMiddleware(); // Both WebHookValidator & WebHookValidatorMiddleware have to be registered
+    .AddChargilyValidatorMiddleware("[APP_SECRET]"); // WebHookValidatorMiddleware have to be registered
 
 var app = builder.Build();
 
