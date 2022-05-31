@@ -3,14 +3,15 @@ using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
 
+
 builder.Services
     .AddEndpointsApiExplorer()
     .AddSwaggerGen();
 
 
-builder.Services.AddChargilyEpayGateway("[API_KEY]");
+builder.Services.AddChargilyEpayGateway("api_KFWtdBczv0qnAMHNxGXCGVK93yEZahZwr4EgFa4xmfnLTIJkezPvW0LgqholrC7S");
 builder.Services
-    .AddChargilyWebHookValidator("[APP_SECRET]")
+    .AddChargilyWebHookValidator("secret_59e7e5159e887cf8c512e8a6de2dff1272e52ee7a68237d471df5fdabe97a1a1")
     .AddChargilyValidatorMiddleware();
 
 

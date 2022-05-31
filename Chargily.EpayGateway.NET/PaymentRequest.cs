@@ -14,8 +14,8 @@ namespace Chargily.EpayGateway.NET
 
         public double DiscountPercentage { get; set; }
 
-        public string RedirectBackTo { get; set; }
-        public string CameFrom { get; set; }
+        public string BackUrl { get; set; }
+        public string WebhookUrl { get; set; }
 
         [JsonConverter(typeof(JsonStringEnumConverter))]
         public PaymentMethod PaymentMethod { get; set; }

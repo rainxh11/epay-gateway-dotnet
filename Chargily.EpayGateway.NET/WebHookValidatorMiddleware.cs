@@ -43,6 +43,8 @@ namespace Chargily.EpayGateway.NET
                             ResponseMessage = JsonSerializer.SerializeToDocument(new
                                 { Message = "Signature Validation Failed!", ProvidedSignature = signature })
                         };
+                        _logger.LogError(
+                            $"[ChargilyEpay.NET Validation Middleware] Signature Validation Failed! Request with 'Signature' Header: {signature}");
                         context.Response.StatusCode = 400;
                         await context.Response.WriteAsync(JsonSerializer.Serialize(response));
                     }

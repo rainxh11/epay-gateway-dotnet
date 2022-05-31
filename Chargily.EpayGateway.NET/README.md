@@ -30,8 +30,8 @@ var payment = new EpayPaymentRequest()
     Amount = 1500,
     DiscountPercentage = 5.0,
     PaymentMethod = PaymentMethod.EDAHABIA,
-    RedirectBackTo = "https://example.com/",
-    CameFrom = "https://shop.com/purchase",
+    BackUrl = "https://yourapp.com/",
+    WebhookUrl = "https://api.yourbackend.com/webhook-validator",
     ExtraInfo = "Product Purchase"
 };
 
