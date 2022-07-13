@@ -2,8 +2,21 @@
 
 [![Latest version](https://img.shields.io/nuget/v/Chargily.EpayGateway.NET.svg)](https://www.nuget.org/packages/Chargily.EpayGateway.NET/)
 
-# Chargily ePay Gateway C\#.NET Plugin, supports ASP.NET Core, Xamarin, .NET MAUI
+# Chargily ePay Gateway C\#.NET Plugin
+## This package supports the following frameowrks and platforms:
+| Framework | Support | Platform |
+|-|-|-|
+| Console | ✅|Windows, Linux, macOS|
+| ASP.NET Core |✅|Windows, Linux, macOS|
+|.NET MAUI |✅|Windows, Linux, macOS, Android, iOS, Tizen|
+| Xamarin | ✅ | Android, iOS |
+| ASP.NET |✅|Windows|
+| WPF |✅|Windows|
+| UWP | ✅ | Windows, Xbox OS |
+| WinForm | ✅ | Windows |
 
+Any C# application that uses `Microsoft.Extensions.DependencyInjection` can use this package
+#
 ![Chargily ePay Gateway](https://raw.githubusercontent.com/Chargily/epay-gateway-php/main/assets/banner-1544x500.png "Chargily ePay Gateway")
 
 Integrate ePayment gateway with Chargily easily.
